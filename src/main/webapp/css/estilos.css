@@ -1,0 +1,148 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 25 abr. 2023, 18:09:41
+    Author     : TIVE*/
+
+body{
+    background-color: #c0392b;
+}
+
+fieldset {
+    border: 3px solid #000000;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 50px;
+    background-color: #ffffff;
+}
+
+legend {
+    float: none;
+    width: auto;
+    padding: 0 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000000;
+}
+
+.formulario{
+    border: 3px solid #5f6a6a;
+    border-radius: 10px;
+    width: 20%;
+    height: 450px;
+    padding-top: 30px;
+    margin-left: 40%;
+    margin-top: 2%;
+    background-color: #cd6155;
+}
+
+.registrar{
+    border: 3px solid #5f6a6a;
+    border-radius: 10px;
+    width: 30%;
+    padding: 20px;
+    margin-left: 35%;
+    margin-top: 1%;
+    background-color: #cd6155;
+    /*justify-items: center;*/
+}
+
+.formato_listas{
+    border: 3px solid #5f6a6a;
+    border-radius: 10px;
+    /*width: 70%;*/
+    width: fit-content;
+    padding: 20px;
+    margin: 20px auto;
+    /*margin-left: 15%;
+    margin-top: 1%;*/
+    background-color: #ffffff;
+}
+
+.lista_cat{
+    border: 3px solid #5f6a6a;
+    border-radius: 10px;
+    /*width: 70%;*/
+    width: fit-content;
+    padding: 20px;
+    margin: 20px auto;
+    /*margin-left: 15%;
+    margin-top: 1%;*/
+    background-color: #ffffff;
+}
+
+.lista_prod{
+    border: 3px solid #5f6a6a;
+    border-radius: 10px;
+    /*width: 95%;*/
+    width: fit-content;
+    padding: 20px;
+    margin: 20px auto;
+    /*margin-left: 3%;
+    margin-top: 1%;*/
+    background-color: #ffffff;
+}
+
+.lista_prov{
+    border: 3px solid #5f6a6a;
+    border-radius: 10px;
+    /*width: 70%;*/
+    width: fit-content;
+    padding: 20px;
+    /*margin-left: 15%;
+    margin-top: 1%;*/
+    margin: 20px auto;
+    background-color: #ffffff;
+}
+
+.lista_empleados{
+    border: 3px solid #5f6a6a;
+    border-radius: 10px;
+    /*width: 90%;*/
+    width: fit-content;
+    padding: 20px;
+    /*margin-left: 5%;
+    margin-top: 1%;*/
+    margin: 20px auto;
+    background-color: #ffffff;
+}
+
+.lista_mov{
+    border: 3px solid #5f6a6a;
+    border-radius: 10px;
+    /*width: 70%;*/
+    width: fit-content;
+    padding: 20px;
+    /*margin-left: 15%;
+    margin-top: 1%;*/
+    margin: 20px auto;
+    background-color: #ffffff;
+}
+
+tr.htmx-swapping td {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+/*.buscador{
+    width: 15%;
+    margin-left: 80%;
+    margin-top: 1%;
+}*/
+
+.contenedor-flex {
+    position: relative; 
+}
+
+.buscador {
+    width: 15%; /* Ajusta según necesidad */
+    position: absolute;
+    left: 75%;
+}
+
+th{
+    text-align: center;
+}
+
