@@ -44,16 +44,6 @@ public class Login_controller extends HttpServlet {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
-        /*if (valor != null) {
-            if (valor != 0) {
-                session.setAttribute("usuario", usuario);
-                //response.sendRedirect("view/nav_admin.jsp");
-                out.print("true");
-            } else {
-                out.print("false");
-            }
-            //dispatcher.forward(request, response);
-        }*/
         if (action != null && action.equals("logout")) {
             if (session != null) {
                 session.invalidate();
@@ -91,14 +81,6 @@ public class Login_controller extends HttpServlet {
             }
             dispatcher.forward(request, response);
         }
- /*if (valor != null) {
-            if (valor != 0) {
-                session.setAttribute("usuario", usuario);
-                out.print("true");
-            } else {
-                out.print("false");
-            }
-        }*/
     }
 
     /**
