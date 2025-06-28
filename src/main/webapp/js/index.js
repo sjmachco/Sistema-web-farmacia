@@ -7,7 +7,7 @@ $(document).ready(function () {
     let tipo_usuario = $('#t_usuario').val();
     if (tipo_usuario !== 'admin') {
         $('#permission').addClass('d-none');
-        $('#regisus-tab-pane').addClass('d-none'); 
+        $('#regisus-tab-pane').addClass('d-none');
     }
 });
 
@@ -262,6 +262,9 @@ function validarMovimiento() {
             success: function (data) {
                 alert(data.hecho);
                 $('#formRegistrarMo')[0].reset();
+                $('#id_mov').val("0");
+                $('#select_prod').prop('disabled', false);
+                $('input[name=tipo_m]').prop('disabled', false);
                 listarMovimientos();
             },
             error: function (error) {
@@ -270,32 +273,6 @@ function validarMovimiento() {
         });
     });
 }
-
-
-/*$(document).ready(function () {
- $('#formRegistrarLo').off('submit').on('submit', function (event) {
- event.preventDefault();
- let user_name = $('#usuario').val();
- let pass = $('#pass').val();
- $.ajax({
- type: 'POST',
- url: 'Login_controller',
- data: $.param({
- user_name: user_name,
- pass: pass
- }),
- success: function (data) {
- if(data.hecho === 'true')
- window.location.href = data.ruta;
- else
- alert(data.incorrecto);
- },
- error: function (error) {
- console.log(error);
- }
- });
- });
- }),*/
 
 function edit_cat() {
     $(".btn-edit").click(function () {
@@ -519,19 +496,61 @@ function del_empleado() {
     });
 }
 
-function edit_movimiento() {
+function editMovimiento() {
     $('.btn-edit').click(function () {
+        document.getElementById('formRegistrarMo').scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
         let id_movimiento = $(this).attr('data-id');
+
         $.ajax({
             type: 'GET',
-            url: 'Movimiento_controller?id=' + id_movimiento,
-            success: function () {
+            url: 'Movimiento_controller?id_movimiento=' + id_movimiento,
 
+            success: function (data) {
+                $('input[name=id_movimiento]').val(data.id_movimiento);
+                $('#select_prod').val(data.producto).prop('disabled', true);
+                $('input[name=cantidad]').val(data.cantidad);
+                $('input[name=tipo_m][value="' + data.tipo_movimiento + '"]')
+                        .prop('checked', true).prop('disabled', true)
+                $('input[name=tipo_m][value="venta"]').prop('disabled', true);
             },
-            error: function () {
+
+            error: function (error) {
                 console.log(error);
             }
         });
+    });
+    limpiarMov();
+}
+
+function deleteMovimiento() {
+    $('.btn-delete').click(function () {
+        let fila = this.parentElement.parentElement;
+        let id_movimiento = $(this).attr('data-id');
+
+        if (confirm('¿Seguro que desea eliminar este movimiento?')) {
+            $.ajax({
+                type: 'DELETE',
+                url: 'Movimiento_controller?id_movimiento=' + id_movimiento,
+
+                success: function (data) {
+                    if (data === 'true') {
+                        $(fila).addClass('animate__animated animate__backOutRight');
+                        setTimeout(function () {
+                            fila.remove();
+                        }, 800);
+                    } else {
+                        alert('Error en la eliminación.');
+                    }
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
     });
 }
 
@@ -793,6 +812,8 @@ function listarMovimientos() {
                 `);
             });
             buscarMovimiento();
+            deleteMovimiento();
+            editMovimiento();
         },
         error: function (error) {
             console.log(error);
@@ -872,6 +893,14 @@ function buscarMovimiento() {
             const texto = fila.textContent.toLowerCase();
             fila.style.display = texto.includes(valor) ? "" : "none";
         });
+    });
+}
+
+function limpiarMov() {
+    $('.limpiar').click(() => {
+        $('#id_mov').val("0");
+        $('#select_prod').prop('disabled', false);
+        $('input[name=tipo_m]').prop('disabled', false);
     });
 }
 

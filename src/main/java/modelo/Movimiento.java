@@ -102,6 +102,6 @@ public class Movimiento {
 
     @Override
     public String toString() {
-        return "Movimiento{id movimiento: " + id_movimiento + ", Cantidad: " + cantidad + "usuario: " + user_name + "}";
+        return "Movimiento{id movimiento: " + id_movimiento + ", Cantidad: " + cantidad + "producto: " + producto + "tipo movimiento: " + tipo_movimiento + "}";
     }
 }

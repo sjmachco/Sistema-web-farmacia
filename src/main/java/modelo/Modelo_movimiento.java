@@ -82,10 +82,10 @@ public class Modelo_movimiento {
         cn = conexion.getConexion();
         
         try {
-            ps = cn.prepareStatement("UPDATE movimientos SET cantidad = ?, id_producto = ? "
+            ps = cn.prepareStatement("UPDATE movimientos SET cantidad = ?, total = ? "
                     + "WHERE id_movimiento = ?");
             ps.setInt(1, movimiento.getCantidad());
-            ps.setInt(2, Integer.valueOf(movimiento.getProducto()));
+            ps.setDouble(2, movimiento.getTotal());
             ps.setInt(3, movimiento.getId_movimiento());
             if(ps.executeUpdate() == 1)
                 return true;
@@ -123,8 +123,8 @@ public class Modelo_movimiento {
         Movimiento movimiento = new Movimiento();
         
         try {
-            ps = cn.prepareStatement("SELECT id_movimiento, cantidad, tipo_movimiento, P.nombre "
-                    + "FROM movimiento AS M INNER JOIN producto AS P ON M.id_producto = P.id_producto "
+            ps = cn.prepareStatement("SELECT id_movimiento, cantidad, tipo_movimiento, P.id_producto "
+                    + "FROM movimientos AS M INNER JOIN producto AS P ON M.id_producto = P.id_producto "
                     + "WHERE id_movimiento = ?");
             ps.setInt(1, id_movimiento);
             rs = ps.executeQuery();
@@ -132,7 +132,8 @@ public class Modelo_movimiento {
                 movimiento.setId_movimiento(rs.getInt(1));
                 movimiento.setCantidad(rs.getInt(2));
                 movimiento.setTipo_movimiento(rs.getString(3));
-                movimiento.setProducto(rs.getString(4));
+                String id_producto = String.valueOf(rs.getInt(4));
+                movimiento.setProducto(id_producto);
             }
             return movimiento;
         } catch (SQLException e) {
@@ -191,6 +192,26 @@ public class Modelo_movimiento {
             System.out.println(e.toString());
             return null;
         }
+    }
+    
+    public Integer getCantMov(Integer id){
+        PreparedStatement ps;
+        ResultSet rs;
+        Integer cantidad = 0;
+        cn = conexion.getConexion();
+        
+        try {
+            ps = cn.prepareStatement("SELECT cantidad FROM movimientos WHERE id_movimiento = ?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            while(rs.next())
+                cantidad = rs.getInt(1);
+            return cantidad;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return null;
     }
     
     public Double getPrecioProducto(String tipo, Integer id_producto){

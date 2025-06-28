@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="cantidad" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required>
                     </div>
                     <div class="col-md-6">
                         <div class="col-md-6">
@@ -67,7 +67,7 @@
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                     <div class="col-md-6">
-                        <button type="reset" class="btn btn-primary">Limpiar</button>
+                        <button type="reset" class="btn btn-primary limpiar">Limpiar</button>
                     </div>
                 </form>
             </div>
