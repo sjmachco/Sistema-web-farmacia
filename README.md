@@ -1,8 +1,11 @@
 Sistema web para una farmacia<br>
--Descripción:
+-Descripción:<br>
 Este sistema web dinámico cuenta con varios módulos, cada uno<br>
 de ellos con diferentes requisitos, campos y<br>
 funcionalidades.<br>
+Al ejecutar el sistema este muestra una pantalla de login<br>
+que permite logearse a los usuarios que anteriormente<br>
+ya han sido registrados por el usuario "admin".<br>
 Tiene un requisito de permisos, donde solo el usuario<br>
 "admin" podrá visualizar el módulo usuario/empleado<br>
 y realizar las funcionalidades que este contiene.<br>
