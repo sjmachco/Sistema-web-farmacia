@@ -1,6 +1,6 @@
 Sistema web para una farmacia<br>
 -Descripción:
-Este sistema cuenta con varios módulos, cada uno<br>
+Este sistema web dinámico cuenta con varios módulos, cada uno<br>
 de ellos con diferentes requisitos, campos y<br>
 funcionalidades.<br>
 Tiene un requisito de permisos, donde solo el usuario<br>
