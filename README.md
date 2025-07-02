@@ -67,11 +67,13 @@
 <h2>Módulo movimiento</h2>
 <h3>Funcionalidad</h3>
 <ul>
- <li>Muestra un formulario donde permite registrar datos de la categoría.</li>
- <li>Muestra un boton actualizar que permite modificar los datos requeridos.</li>
+ <li>Muestra un formulario donde permite registrar los tipos de movimiento venta o compra.</li>
+ <li>El movimiento guarda la fecha/hora, además el nombre del usuario que lo registra.</li>
+ <li>Estos datos no se pueden manipular, excepto el campo cantidad.</li>
+ <li>Muestra un boton actualizar que permite modificar el movimiento seleccionado.</li>
+ <li>Los cambios del movimiento afectan al stock del producto, dependiendo si es venta o compra.</li>
  <li>Muestra un boton eliminar que permite borrar los datos requeridos.</li>
- <li>Muestra un buscador que permite encontrar los dstos requeridos.</li>
- <li>Valida la categoría registrado, por eso motivo no puede existir categorias duplicadas.</li>
+ <li>Muestra un buscador que permite encontrar los datos requeridos.</li>
 </ul>
 <img src="imagenes/7movimiento.png">
 
