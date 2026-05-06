@@ -38,13 +38,13 @@
                                         'Empleado_controller', 'action=mostrar_datos')"><strong>Menu principal</strong></button>
             </li>
 
-                <li id="permission" class="nav-item" role="presentation">
-                    <button class="nav-link" id="regisus-tab" 
-                            data-bs-toggle="tab" data-bs-target="#regisus-tab-pane" 
-                            type="button" role="tab" aria-controls="regisus-tab-pane" 
-                            aria-selected="false" onclick="cargarContenido('regisus-tab-pane',
+            <li id="permission" class="nav-item" role="presentation">
+                <button class="nav-link" id="regisus-tab" 
+                        data-bs-toggle="tab" data-bs-target="#regisus-tab-pane" 
+                        type="button" role="tab" aria-controls="regisus-tab-pane" 
+                        aria-selected="false" onclick="cargarContenido('regisus-tab-pane',
                                             'Empleado_controller', 'action=regist_usuario')"><strong>Usuario</strong></button>
-                </li>
+            </li>
 
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="regisprod-tab" 
@@ -67,13 +67,6 @@
                         aria-selected="false" onclick="cargarContenido('regisprov-tab-pane',
                                         'Proveedor_controller', 'action=regist_prov')"><strong>Proveedor</strong></button>
             </li>
-            <!--<li class="nav-item" role="presentation">
-                <button class="nav-link" id="listus-tab" 
-                        data-bs-toggle="tab" data-bs-target="#listus-tab-pane" 
-                        type="button" role="tab" aria-controls="listus-tab-pane" 
-                        aria-selected="false" onclick="cargarContenido('listus-tab-pane',
-                                        'Empleado_controller', 'action=list_empl')"><strong>Lista de empleados</strong></button>
-            </li>-->
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="regismov-tab" 
                         data-bs-toggle="tab" data-bs-target="#regismov-tab-pane" 
@@ -91,9 +84,7 @@
         </ul>
         <div class="tab-content" id="myTabContent">         
             <div class="tab-pane fade" id="menu-tab-pane" role="tabpanel" aria-labelledby="menu-tab" tabindex="0"></div>
-
-                <div class="tab-pane fade" id="regisus-tab-pane" role="tabpanel" aria-labelledby="regisus-tab" tabindex="0"></div>
-
+            <div class="tab-pane fade" id="regisus-tab-pane" role="tabpanel" aria-labelledby="regisus-tab" tabindex="0"></div>
             <div class="tab-pane fade" id="regisprod-tab-pane" role="tabpanel" aria-labelledby="regisprod-tab" tabindex="0"></div>
             <div class="tab-pane fade" id="regiscat-tab-pane" role="tabpanel" aria-labelledby="regiscat-tab" tabindex="0"></div>
             <div class="tab-pane fade" id="regisprov-tab-pane" role="tabpanel" aria-labelledby="regisprov-tab" tabindex="0"></div>
