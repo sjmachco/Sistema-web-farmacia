@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Sistema_farmacia"/>
+<Context path="/Sistema_farmacia">
     <Parameter name="DB_URL_DEPLOY_SUPABASE" value="jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres"/>
     <Parameter name="DB_USER_NAME_DEPLOY_SUPABASE" value="postgres.vgrfkknvrocznhoykwew"/>
     <Parameter name="DB_PASSWORD_DEPLOY_SUPABASE" value="Copitodenieves09#"/>
