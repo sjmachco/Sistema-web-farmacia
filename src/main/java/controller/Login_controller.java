@@ -37,18 +37,12 @@ public class Login_controller extends HttpServlet {
         RequestDispatcher dispatcher = null;
         String action = request.getParameter("action_l");
         HttpSession session = request.getSession(false);
-        PrintWriter out = response.getWriter();
-        String usuario = request.getParameter("user_name");
-        String pass = request.getParameter("clave");
-        Integer valor = m_login.validarLogin(usuario, pass);
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
         if (action != null && action.equals("logout")) {
-            if (session != null) {
-                session.invalidate();
-                dispatcher = request.getRequestDispatcher("view/login.jsp");
-            }
+            session.invalidate();
+            dispatcher = request.getRequestDispatcher("view/login.jsp");
             dispatcher.forward(request, response);
         }
     }
