@@ -18,15 +18,12 @@ import java.util.Objects;
  * @author TIVITO
  */
 public class Modelo_proveedor {
-
-    Conexion conexion = new Conexion();
-    Connection cn;
-
     public List<Proveedor> listProveedor() {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Proveedor> list = new ArrayList<>();
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         try {
             ps = cn.prepareStatement("SELECT id_proveedor, nombre, ruc, telefono, "
                     + "direccion, pais, estado FROM proveedor");
@@ -46,12 +43,15 @@ public class Modelo_proveedor {
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
 
     public void insertProveedor(Proveedor proveedor) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
 
         try {
             ps = cn.prepareStatement("INSERT INTO proveedor(nombre, ruc, telefono, "
@@ -66,14 +66,14 @@ public class Modelo_proveedor {
         } catch (SQLException e) {
             System.out.println(e.toString());
         } finally {
-            ps.close();
-            cn.close();
+            conexion.desconectar();
         }
     }
 
     public boolean updateProveedor(Proveedor proveedor) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
 
         try {
             ps = cn.prepareStatement("UPDATE proveedor set nombre = ?, ruc = ?, "
@@ -91,8 +91,7 @@ public class Modelo_proveedor {
         } catch (SQLException e) {
             System.out.println(e.toString());
         } finally {
-            ps.close();
-            cn.close();
+            conexion.desconectar();
         }
         return false;
     }
@@ -112,8 +111,9 @@ public class Modelo_proveedor {
         List<String> lista = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        cn = conexion.getConexion();
-
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
+        
         try {
             ps = cn.prepareStatement("SELECT nombre FROM proveedor");
             rs = ps.executeQuery();
@@ -124,12 +124,15 @@ public class Modelo_proveedor {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
 
     public boolean deleteProveedor(Integer id_proveedor) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
 
         try {
             ps = cn.prepareStatement("DELETE FROM proveedor WHERE id_proveedor = ?");
@@ -140,17 +143,18 @@ public class Modelo_proveedor {
         } catch (SQLException e) {
             System.out.println(e.toString());
         } finally {
-            ps.close();
-            cn.close();
+            conexion.desconectar();
         }
         return false;
     }
 
     public Proveedor getProveedorId(Integer id_proveedor) {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         ResultSet rs = null;
         Proveedor proveedor = new Proveedor();
+        
         try {
             ps = cn.prepareStatement("SELECT id_proveedor, nombre, ruc, telefono, "
                     + "direccion, pais, estado FROM proveedor WHERE id_proveedor = ?");
@@ -169,6 +173,8 @@ public class Modelo_proveedor {
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
 }

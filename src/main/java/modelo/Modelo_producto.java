@@ -16,14 +16,11 @@ import java.util.Objects;
  * @author TIVE
  */
 public class Modelo_producto {
-
-    Connection cn;
-    Conexion conexion = new Conexion();
-
     public List<Producto> listaProductos() {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         List<Producto> lista = new ArrayList<>();
 
         try {
@@ -57,12 +54,15 @@ public class Modelo_producto {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
 
     public void insertProductos(Producto producto) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
 
         try {
             ps = cn.prepareStatement("INSERT INTO producto(nombre, precio_compra, "
@@ -87,15 +87,14 @@ public class Modelo_producto {
         } catch (SQLException e) {
             System.out.println(e.toString());
         } finally {
-            ps.close();
-            cn.close();
+            conexion.desconectar();
         }
     }
 
     public boolean updateProducto(Producto producto) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
-
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         try {
             ps = cn.prepareStatement("UPDATE producto SET nombre = ?, precio_compra = ?, "
                     + "precio_venta = ?, fecha_fabricacion = ?, fecha_vencimiento = ?, "
@@ -121,15 +120,15 @@ public class Modelo_producto {
         } catch (SQLException e) {
             System.out.println(e.toString());
         } finally{
-            ps.close();
-            cn.close();
+            conexion.desconectar();
         }
         return false;
     }
 
     public boolean deleteProducto(Integer id_producto) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
 
         try {
             ps = cn.prepareStatement("DELETE FROM producto WHERE id_producto = ?");
@@ -139,8 +138,7 @@ public class Modelo_producto {
         } catch (SQLException e) {
             System.out.println(e.toString());
         } finally {
-            ps.close();
-            cn.close();
+            conexion.desconectar();
         }
         return false;
     }
@@ -158,7 +156,8 @@ public class Modelo_producto {
     
     public Producto getIdProducto(Integer id_producto){
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         ResultSet rs = null;
         Producto producto = new Producto();
         
@@ -188,6 +187,8 @@ public class Modelo_producto {
             return producto;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally{
+            conexion.desconectar();
         }
         return null;
     }

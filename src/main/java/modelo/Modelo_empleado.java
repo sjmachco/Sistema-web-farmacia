@@ -54,11 +54,9 @@ public class Modelo_empleado {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
-        } /*finally {
-            cn.close();
-            ps.close();
-            rs.close();
-        }*/
+        } finally {
+            conexion.desconectar();
+        }
     }
 
     public List<String> listLogin() {
@@ -76,6 +74,8 @@ public class Modelo_empleado {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
     
@@ -96,6 +96,8 @@ public class Modelo_empleado {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
 
@@ -121,8 +123,7 @@ public class Modelo_empleado {
             } catch (SQLException e) {
                 System.out.println(e.toString());
             } finally {
-                cn.close();
-                ps.close();
+                conexion.desconectar();
             }
         }
     }
@@ -140,6 +141,8 @@ public class Modelo_empleado {
                 ps.execute();
             } catch (SQLException e) {
                 System.out.println(e.toString());
+            } finally{
+                conexion.desconectar();
             }
         }
     }
@@ -167,8 +170,7 @@ public class Modelo_empleado {
             } catch (SQLException e) {
                 System.out.println(e.toString());
             } finally {
-                cn.close();
-                ps.close();
+                conexion.desconectar();
             }
         }
         return false;
@@ -186,6 +188,8 @@ public class Modelo_empleado {
                 return true;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally{
+            conexion.desconectar();
         }
         return false;
     }
@@ -203,8 +207,7 @@ public class Modelo_empleado {
             } catch (SQLException e) {
                 System.out.println(e.toString());
             } finally {
-                cn.close();
-                ps.close();
+                conexion.desconectar();
             }
         }
         return false;
@@ -224,6 +227,8 @@ public class Modelo_empleado {
                 }
             } catch (SQLException e) {
                 System.out.println(e.toString());
+            } finally{
+                conexion.desconectar();
             }
         }
         return id_empleado;
@@ -260,6 +265,8 @@ public class Modelo_empleado {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
     
@@ -285,6 +292,8 @@ public class Modelo_empleado {
             return empleado;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally{
+            conexion.desconectar();
         }
         return null;
     }

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
  * @author TIVE
  */
 public class Conexion {
+
     Connection conexion = null;
     private final String url = System.getenv("DB_URL_DEPLOY_SUPABASE");
     //private final String url = "jdbc:mysql://localhost:3306/farmacia";
@@ -37,7 +38,14 @@ public class Conexion {
         }
     }
 
-    public void desconectar(){
-        conexion = null;
+    public void desconectar() {
+        try {
+            if (conexion != null && !conexion.isClosed()) {
+                conexion.close();
+                conexion = null;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
     }
 }

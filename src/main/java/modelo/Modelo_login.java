@@ -19,12 +19,10 @@ import java.util.Objects;
 
 public class Modelo_login {
 
-    Connection cn;
-    Conexion conexion = new Conexion();
-
     public List<Login> listLogin() {
         PreparedStatement ps;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         ResultSet rs;
         Login login = new Login();
         List<Login> lista = new ArrayList<>();
@@ -41,6 +39,8 @@ public class Modelo_login {
             return lista;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally {
+            conexion.desconectar();
         }
         return null;
     }
@@ -48,7 +48,8 @@ public class Modelo_login {
     public Integer validarLogin(String user_name, String pass) {
         PreparedStatement ps;
         ResultSet rs;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         Integer valor = 0;
 
         try {
@@ -62,28 +63,34 @@ public class Modelo_login {
             return valor;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally {
+            conexion.desconectar();
         }
         return null;
     }
-    
-    public String getNameLogin(String user_name){
+
+    public String getNameLogin(String user_name) {
         PreparedStatement ps;
         ResultSet rs;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         String nombre = null;
-        
+
         try {
             ps = cn.prepareStatement("SELECT E.nombre FROM login AS L "
                     + "INNER JOIN empleado AS E ON L.id_empleado = E.id_empleado WHERE user_name = ?");
             ps.setString(1, user_name);
             rs = ps.executeQuery();
-            while(rs.next())
+            while (rs.next()) {
                 nombre = rs.getString(1);
+            }
             return nombre;
-            
+
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
+        } finally {
+            conexion.desconectar();
         }
     }
 }

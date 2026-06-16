@@ -19,22 +19,21 @@ import java.time.LocalDateTime;
 import java.sql.CallableStatement;
 
 public class Modelo_movimiento {
-    Connection cn;
-    Conexion conexion = new Conexion();
-    
-    public List<Movimiento> listMovimientos(){
+
+    public List<Movimiento> listMovimientos() {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         List<Movimiento> lista = new ArrayList<>();
-        
+
         try {
             ps = cn.prepareStatement("SELECT id_movimiento, cantidad, tipo_movimiento, fecha_hora, "
                     + "concat(E.nombre, ' ', E.apellidos) AS datos, P.nombre, total, precio_unitario "
                     + "FROM movimientos AS M INNER JOIN empleado AS E ON M.id_empleado = E.id_empleado "
                     + "INNER JOIN producto AS P ON M.id_producto = P.id_producto ORDER BY id_movimiento");
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Movimiento mov = new Movimiento();
                 mov.setId_movimiento(rs.getInt(1));
                 mov.setCantidad(rs.getInt(2));
@@ -51,13 +50,16 @@ public class Modelo_movimiento {
             return lista;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally{
+            conexion.desconectar();
         }
         return null;
     }
-    
-    public void insertMovimiento(Movimiento movimiento) throws SQLException{
+
+    public void insertMovimiento(Movimiento movimiento) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         try {
             ps = cn.prepareStatement("INSERT INTO movimientos(cantidad, tipo_movimiento, "
                     + "id_producto, id_empleado, total, precio_unitario) VALUES(?, ?, ?, ?, ?, ?)");
@@ -71,64 +73,66 @@ public class Modelo_movimiento {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
-        } finally{
-            ps.close();
-            cn.close();
+        } finally {
+            conexion.desconectar();
         }
     }
-    
-    public boolean updateMovimiento(Movimiento movimiento) throws SQLException{
+
+    public boolean updateMovimiento(Movimiento movimiento) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
-        
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
+
         try {
             ps = cn.prepareStatement("UPDATE movimientos SET cantidad = ?, total = ? "
                     + "WHERE id_movimiento = ?");
             ps.setInt(1, movimiento.getCantidad());
             ps.setDouble(2, movimiento.getTotal());
             ps.setInt(3, movimiento.getId_movimiento());
-            if(ps.executeUpdate() == 1)
+            if (ps.executeUpdate() == 1) {
                 return true;
+            }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        } finally{
-            ps.close();
-            cn.close();
+        } finally {
+            conexion.desconectar();
         }
         return false;
     }
-    
-    public boolean deleteMovimiento(Integer id_movimiento) throws SQLException{
+
+    public boolean deleteMovimiento(Integer id_movimiento) throws SQLException {
         PreparedStatement ps = null;
-        cn = conexion.getConexion();
-        
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
+
         try {
             ps = cn.prepareStatement("DELETE FROM movimientos WHERE id_movimiento = ?");
             ps.setInt(1, id_movimiento);
-            if(ps.executeUpdate() == 1)
+            if (ps.executeUpdate() == 1) {
                 return true;
+            }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        } finally{
-            ps.close();
-            cn.close();
+        } finally {
+            conexion.desconectar();
         }
         return false;
     }
-    
-    public Movimiento getIdMovimiento(Integer id_movimiento){
+
+    public Movimiento getIdMovimiento(Integer id_movimiento) {
         PreparedStatement ps;
-        cn = conexion.getConexion();
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         ResultSet rs;
         Movimiento movimiento = new Movimiento();
-        
+
         try {
             ps = cn.prepareStatement("SELECT id_movimiento, cantidad, tipo_movimiento, P.id_producto "
                     + "FROM movimientos AS M INNER JOIN producto AS P ON M.id_producto = P.id_producto "
                     + "WHERE id_movimiento = ?");
             ps.setInt(1, id_movimiento);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 movimiento.setId_movimiento(rs.getInt(1));
                 movimiento.setCantidad(rs.getInt(2));
                 movimiento.setTipo_movimiento(rs.getString(3));
@@ -138,33 +142,40 @@ public class Modelo_movimiento {
             return movimiento;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally{
+            conexion.desconectar();
         }
         return null;
     }
-    
-    public Integer getIdUserName(String user_name){
+
+    public Integer getIdUserName(String user_name) {
         PreparedStatement ps;
         ResultSet rs;
         Integer id_user_name = null;
-        cn = conexion.getConexion();
-        
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
+
         try {
             ps = cn.prepareStatement("SELECT id_empleado FROM login WHERE user_name = ?");
             ps.setString(1, user_name);
             rs = ps.executeQuery();
-            while(rs.next())
+            while (rs.next()) {
                 id_user_name = rs.getInt(1);
+            }
             return id_user_name;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally{
+            conexion.desconectar();
         }
         return null;
     }
-    
-    public void updateStockProducto(Integer cantidad, Integer id_producto){
+
+    public void updateStockProducto(Integer cantidad, Integer id_producto) {
         PreparedStatement ps;
-        cn = conexion.getConexion();
-        
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
+
         try {
             ps = cn.prepareStatement("UPDATE producto set stock = ? WHERE id_producto = ?");
             ps.setInt(1, cantidad);
@@ -172,64 +183,78 @@ public class Modelo_movimiento {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally{
+            conexion.desconectar();
         }
     }
-    
-    public Integer getCantidad(Integer id_producto){
+
+    public Integer getCantidad(Integer id_producto) {
         PreparedStatement ps;
         ResultSet rs;
         Integer cantidad = null;
-        cn = conexion.getConexion();
-       
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
+
         try {
             ps = cn.prepareStatement("SELECT stock FROM producto WHERE id_producto = ?");
             ps.setInt(1, id_producto);
             rs = ps.executeQuery();
-            while(rs.next())
+            while (rs.next()) {
                 cantidad = rs.getInt(1);
+            }
             return cantidad;
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
-    
-    public Integer getCantMov(Integer id){
+
+    public Integer getCantMov(Integer id) {
         PreparedStatement ps;
         ResultSet rs;
         Integer cantidad = 0;
-        cn = conexion.getConexion();
-        
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
+
         try {
             ps = cn.prepareStatement("SELECT cantidad FROM movimientos WHERE id_movimiento = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            
-            while(rs.next())
+
+            while (rs.next()) {
                 cantidad = rs.getInt(1);
+            }
             return cantidad;
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } finally{
+            conexion.desconectar();
         }
         return null;
     }
-    
-    public Double getPrecioProducto(String tipo, Integer id_producto){
+
+    public Double getPrecioProducto(String tipo, Integer id_producto) {
         CallableStatement cs;
         ResultSet rs;
         Double precio_unitario = null;
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.getConexion();
         try {
             cs = cn.prepareCall("{CALL getPrecio(?, ?)}");
             cs.setString(1, tipo);
             cs.setInt(2, id_producto);
             rs = cs.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 precio_unitario = rs.getDouble("precio_unitario");
             }
             return precio_unitario;
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
+        } finally{
+            conexion.desconectar();
         }
     }
 }
