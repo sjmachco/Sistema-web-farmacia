@@ -9,23 +9,7 @@ $(document).ready(function () {
         $('#permission').addClass('d-none');
         $('#regisus-tab-pane').addClass('d-none');
     }
-
-    /*if (tipo_usuario !== '') {
-        fetch('Empleado_controller?action=mostrar_datos', {method: 'GET'})
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Error en la solicitud: " + response.statusText);
-                    }
-                    return response.text(); // Obtenemos el contenido de la respuesta
-                })
-                .then(data => {
-                    const contenedor = document.getElementById('menu-tab-pane');
-                    contenedor.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error("Hubo un problema con la solicitud:", error);
-                });
-    }*/
+    document.getElementById('menu-tab-pane').classList.add('show', 'active');
     cargarContenido('menu-tab-pane', 'Empleado_controller', 'action=mostrar_datos');
 });
 

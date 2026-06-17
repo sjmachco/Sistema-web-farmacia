@@ -43,7 +43,7 @@
                         data-bs-toggle="tab" data-bs-target="#regisus-tab-pane" 
                         type="button" role="tab" aria-controls="regisus-tab-pane" 
                         aria-selected="false" onclick="cargarContenido('regisus-tab-pane',
-                                            'Empleado_controller', 'action=regist_usuario')"><strong>Usuario</strong></button>
+                                        'Empleado_controller', 'action=regist_usuario')"><strong>Usuario</strong></button>
             </li>
 
             <li class="nav-item" role="presentation">
@@ -91,6 +91,7 @@
             <div class="tab-pane fade" id="regismov-tab-pane" role="tabpanel" aria-labelledby="regismov-tab" tabindex="0"></div>
             <div class="d-flex" id="logout" aria-labelledby="logout-option"></div>
         </div>
-        <script src="${pageContext.request.contextPath}/js/index.js"></script>
+        <script src="${pageContext.request.contextPath}/js/index.js">
+        </script>
     </body>
 </html>

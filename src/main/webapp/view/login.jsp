@@ -31,12 +31,12 @@
                 </div>
                 <div style="margin: 20px;">
                     <div style="margin-top: 30px;" class="mb-3">
-                        <label for="usuario" class="form-label">Usuario</label>
+                        <label for="usuario" class="form-label">Usuario<span style="color: #9F0712">*admin</span></label>
                         <input type="text" class="form-control" id="usuario" name="usuario" 
                                aria-describedby="emailHelp" required>
                     </div>  
                     <div class="mb-3">
-                        <label for="pass" class="form-label">Contraseña</label>
+                        <label for="pass" class="form-label">Contraseña<span style="color: #9F0712">*admin123</span></label>
                         <input type="password" class="form-control" id="pass" name="pass" required>
                     </div>
                 </div>
