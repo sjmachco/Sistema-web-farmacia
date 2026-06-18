@@ -236,16 +236,17 @@ public class Modelo_movimiento {
     }
 
     public Double getPrecioProducto(String tipo, Integer id_producto) {
-        CallableStatement cs;
+        //CallableStatement cs;
+        PreparedStatement ps;
         ResultSet rs;
         Double precio_unitario = null;
         Conexion conexion = new Conexion();
         Connection cn = conexion.getConexion();
         try {
-            cs = cn.prepareCall("{CALL getPrecio(?, ?)}");
-            cs.setString(1, tipo);
-            cs.setInt(2, id_producto);
-            rs = cs.executeQuery();
+            ps = cn.prepareStatement("SELECT * FROM getPrecio(?, ?)");
+            ps.setString(1, tipo);
+            ps.setInt(2, id_producto);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 precio_unitario = rs.getDouble("precio_unitario");
             }
