@@ -243,6 +243,7 @@ public class Modelo_movimiento {
         Conexion conexion = new Conexion();
         Connection cn = conexion.getConexion();
         try {
+            //cs = cn.prepareCall("{CALL getPrecio(?, ?)}");
             ps = cn.prepareStatement("SELECT * FROM getPrecio(?, ?)");
             ps.setString(1, tipo);
             ps.setInt(2, id_producto);
